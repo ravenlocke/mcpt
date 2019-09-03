@@ -51,7 +51,7 @@ def _wilson(p, n, alpha):
 
 
 # Main function.
-def permutation_test(x, y, f, n, side, confidence = 0.99):
+def permutation_test(x, y, f, side, n=10_000, confidence = 0.99):
     x_len = len(x)
     combined = list(x) + list(y)
     _np.random.shuffle(combined)
