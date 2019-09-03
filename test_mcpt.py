@@ -14,7 +14,7 @@ def test_i():
     n = 100_000
     side = "lower"
 
-    result = mcpt.permutation_test(x, y, f, n, side)
+    result = mcpt.permutation_test(x, y, f, side, n=n)
     assert 0.1 >= result.lower
     assert 0.1 <= result.upper
 
@@ -31,7 +31,7 @@ def test_ii():
     n = 100_000
     side = "both"
 
-    result = mcpt.permutation_test(x, y, f, n, side)
+    result = mcpt.permutation_test(x, y, f, side, n=n)
     assert 0.2 >= result.lower
     assert 0.2 <= result.upper
 
@@ -50,7 +50,7 @@ def test_iii():
     f = "mean"
     n = 100_000
     side = "greater"
-    result = mcpt.permutation_test(x, y, f, n, side)
+    result = mcpt.permutation_test(x, y, f, side, n=n)
     assert 0.5 >= result.lower
     assert 0.5 <= result.upper
 
@@ -74,6 +74,6 @@ def test_iv():
     f = "mean"
     n = 100_000
     side = "lower"
-    result = mcpt.permutation_test(x, y, f, n, side)
+    result = mcpt.permutation_test(x, y, f, side, n=n)
     assert 1 >= result.lower
     assert 1 <= result.upper
