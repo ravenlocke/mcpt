@@ -42,7 +42,7 @@ Below is an example of this in action
 >> n = 100_000
 >> side = "lower"
 
->> result = mcpt.permutation_test(x, y, f, n, side)
+>> result = mcpt.permutation_test(x, y, f, side, n=n)
 >> print(result)
 Result(lower=0.09815650454064283, upper=0.10305649415095638, confidence=0.99)
 </pre>
