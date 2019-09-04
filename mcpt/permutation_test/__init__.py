@@ -1,12 +1,16 @@
+import multiprocessing as _mp
+
 import numpy as _np
 
 from mcpt import _GT, _LT, _BOTH, _RESULT
 from mcpt.ci import wilson
 from mcpt.plot import plot_histogram
 
+
 # Handlers for the different sides.
 def _greater(tup):
-    combined, x_len, reference, f = tup
+    combined, x_len, reference, f, seed = tup
+    _np.random.seed(seed)
     _np.random.shuffle(combined)
     x, y = combined[:x_len], combined[x_len:]
     diff = f(x) - f(y)
@@ -14,7 +18,8 @@ def _greater(tup):
 
 
 def _lower(tup):
-    combined, x_len, reference, f = tup
+    combined, x_len, reference, f, seed = tup
+    _np.random.seed(seed)
     _np.random.shuffle(combined)
     x, y = combined[:x_len], combined[x_len:]
     diff = f(x) - f(y)
@@ -22,18 +27,29 @@ def _lower(tup):
 
 
 def _both(tup):
-    combined, x_len, reference, f = tup
+    combined, x_len, reference, f, seed = tup
+    _np.random.seed(seed)
     _np.random.shuffle(combined)
     x, y = combined[:x_len], combined[x_len:]
     diff = abs(f(x) - f(y))
     return diff >= reference, diff
 
 
+def _job_hander(f, jobs, cores):
+    if cores == 1:
+        return map(f, jobs)
+
+    with _mp.Pool(cores) as p:
+        results = p.map(f, jobs)
+    return results
+
+
 # Main function.
-def permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None):
+def permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None, cores=1, seed=None):
+    rng = _np.random.RandomState(seed)
+
     x_len = len(x)
     combined = list(x) + list(y)
-    _np.random.shuffle(combined)
 
     if callable(f):
         _f = f
@@ -55,14 +71,14 @@ def permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None):
     else:
         raise ValueError("{} not valid for side -- should be 'greater', 'lower', or 'both'".format(side))
 
-    jobs = ((combined, x_len, diff, _f) for _ in range(n))
+    jobs = ((combined, x_len, diff, _f, rng.randint(0, 4294967295)) for _ in range(n))
 
     if side in _GT:
-        result = map(_greater, jobs)
+        result = _job_hander(_greater, jobs, cores)
     elif side in _LT:
-        result = map(_lower, jobs)
+        result = _job_hander(_lower, jobs, cores)
     else:
-        result = map(_both, jobs)
+        result = _job_hander(_both, jobs, cores)
 
     v = []
     p = 0

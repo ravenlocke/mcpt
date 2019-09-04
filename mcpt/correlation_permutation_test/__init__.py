@@ -1,3 +1,5 @@
+import multiprocessing as _mp
+
 import numpy as _np
 import scipy.stats as _st
 
@@ -7,24 +9,28 @@ from mcpt.plot import plot_histogram
 
 
 def _correlation_greater(tup):
-    x, y, stat_0, f = tup
+    x, y, stat_0, f, seed = tup
+    _np.random.seed(seed)
     _np.random.shuffle(y)
     stat = f(x, y)
     return stat >= stat_0, stat
 
 
 def _correlation_lower(tup):
-    x, y, stat_0, f = tup
+    x, y, stat_0, f, seed = tup
+    _np.random.seed(seed)
     _np.random.shuffle(y)
     stat = f(x, y)
     return stat <= stat_0, stat
 
 
 def _correlation_both(tup):
-    x, y, stat_0, f = tup
+    x, y, stat_0, f, seed = tup
+    _np.random.seed(seed)
     _np.random.shuffle(y)
     stat = abs(f(x, y))
     return stat >= stat_0, stat
+
 
 
 def _pearsonr(x, y):
@@ -35,7 +41,23 @@ def _spearmanr(x, y):
     return _st.spearmanr(x, y)[0]
 
 
-def correlation_permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None):
+
+def _job_hander(f, jobs, cores):
+    if cores == 1:
+        return map(f, jobs)
+
+    with _mp.Pool(cores) as p:
+        results = p.map(f, jobs)
+
+    return results
+
+
+
+def correlation_permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None, cores=1,
+    seed=None):
+
+    rng = _np.random.RandomState(seed)
+
     if callable(f):
         _f = f
     elif f == "pearsonr":
@@ -54,14 +76,14 @@ def correlation_permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=N
     else:
         raise ValueError("{} not valid for side -- should be 'greater', 'lower', or 'both'".format(side))
 
-    jobs = ((x[:], y[:], stat_0, _f) for _ in range(n))
+    jobs = ((x[:], y[:], stat_0, _f, rng.randint(0, 4294967295)) for _ in range(n))
 
     if side in _GT:
-        result = map(_correlation_greater, jobs)
+        result = _job_hander(_correlation_greater, jobs, cores)
     elif side in _LT:
-        result = map(_correlation_lower, jobs)
+        result = _job_hander(_correlation_lower, jobs, cores)
     else:
-        result = map(_correlation_both, jobs)
+        result = _job_hander(_correlation_both, jobs, cores)
 
 
     v = []
