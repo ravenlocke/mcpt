@@ -180,3 +180,18 @@ def test_ix():
             assert (result_a != result_c)
             assert (result_a != result_d)
             assert (result_c != result_d)
+
+
+def test_x():
+	from scipy.stats import kendalltau
+
+	x = [4.02, 4.52, 4.79, 4.89, 5.27, 5.63, 5.89, 6.08, 6.13, 6.19, 6.47]
+	y = [4.56, 2.92, 2.71, 3.34, 3.53, 3.47, 3.20, 4.51, 3.76, 3.77, 4.03]
+
+	def ktau(x, y):
+		tau, _ = kendalltau(x, y)
+		return tau
+
+	result = mcpt.correlation_permutation_test(x, y, side="both", f=ktau)
+	assert result.lower <= 0.1646
+	assert result.upper >= 0.1646 
