@@ -22,7 +22,7 @@ To get started, we recommend you read through Installation, Quickstart, and Func
 
 If you use `mcpt` in your research, please support us by citing us:
 
-> David J. Skelton. (2019, September 5). mcpt: Monte Carlo permutation tests for Python 3 (Version 0.1.3). Zenodo. http://doi.org/10.5281/zenodo.3387528
+> David J. Skelton. (2019, September 5). mcpt: Monte Carlo permutation tests for Python (Version 0.1.3). Zenodo. http://doi.org/10.5281/zenodo.3387528
 
 
 
