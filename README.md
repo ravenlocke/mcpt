@@ -2,7 +2,7 @@
 
 
 # mcpt: Monte Carlo permutation tests for Python
-mcpt is a Python 3 library for calculating p-values through Monte Carlo permutation tests. mcpt provides an intuitive, simple, and highly customisable interface to determining statistical significance.
+`mcpt` is a Python 3 library for calculating p-values through Monte Carlo permutation tests, providing an intuitive, simple, and highly customisable interface to determining statistical significance.
 
 To get started, we recommend you read through Installation, Quickstart, and Functions sections of our [read the docs documentation](https://mcpt.readthedocs.io/en/latest/). Also check out the [FAQ](https://mcpt.readthedocs.io/en/latest/documentation/faq.html), which we update regularly. If you have concerns about the software, or feel that there is something that should be more explicit, then we’d love to hear from you – [please open an issue on Github](https://github.com/Ravenlocke/mcpt/issues) and we’ll get back in touch ASAP.
 
@@ -18,7 +18,7 @@ pip install mcpt
 `mcpt` contains two main functions: `mcpt.permutation_test` and `mcpt.correlation_permutation_test`. 
 
 
-Below is an example of the `mcpt.permutation_test` -- for more info, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#permutation-test)
+Below is an example of the `mcpt.permutation_test` - for more info, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#permutation-test)
 <pre>
 >> import mcpt
 >> x = [10, 9, 11]
@@ -32,7 +32,7 @@ Below is an example of the `mcpt.permutation_test` -- for more info, please see 
 Result(lower=0.09815650454064283, upper=0.10305649415095638, confidence=0.99)
 </pre>
 
-Below is an example of `mcpt.correlation_permutation_test` -- for more information, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#correlation-permutation-test)
+Below is an example of `mcpt.correlation_permutation_test` - for more information, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#correlation-permutation-test)
 
 <pre>
 >> import mcpt
