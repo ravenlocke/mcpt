@@ -105,6 +105,7 @@ def test_vi():
     assert expected >= result.lower
     assert expected <= result.upper
 
+
 def test_vii():
     # From https://www.thoughtco.com/example-of-a-permutation-test-3997741
     # One sided (lower) should be 0.1,
@@ -118,6 +119,7 @@ def test_vii():
     result = mcpt.permutation_test(x, y, f, side, n=n, cores=2, seed=4919)
     assert 0.1 >= result.lower
     assert 0.1 <= result.upper
+
 
 def test_viii():
     # Taken from http://biol09.biol.umontreal.ca/PLcourses/Statistical_tests.pdf
@@ -139,18 +141,42 @@ def test_viii():
 def test_ix():
     # Test that seeding works.
     x = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
-    y = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
+    y = [ -1.28, 1.04, -1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05,]
 
     seed = 4919
-    n = 100
-    for side in ['greater', 'lower', 'both']:
-        for cores in [1,2]:
-            result_a = mcpt.permutation_test(x, y, "mean", side, n=n, cores=cores, seed=seed)
-            result_b = mcpt.permutation_test(x, y, "mean", side, n=n, cores=cores, seed=seed)
-            result_c = mcpt.permutation_test(x, y, "mean", side, n=n, cores=cores, seed=seed + 1)
-            assert(result_a == result_b != result_c)
+    n = 10_000
+    for side in ["greater", "lower", "both"]:
+        for cores in [1, 2]:
+            result_a = mcpt.permutation_test(
+                x, y, "mean", side, n=n, cores=cores, seed=seed
+            )
+            result_b = mcpt.permutation_test(
+                x, y, "mean", side, n=n, cores=cores, seed=seed
+            )
+            result_c = mcpt.permutation_test(
+                x, y, "mean", side, n=n, cores=cores)
+            result_d = mcpt.permutation_test(
+                x, y, "mean", side, n=n, cores=cores)
+            
+            assert (result_a == result_b) 
+            assert (result_a != result_c)
+            assert (result_a != result_d)
+            assert (result_c != result_d)
 
-            result_a = mcpt.correlation_permutation_test(x, y, "pearsonr", side, n=n, cores=cores, seed=seed)
-            result_b = mcpt.correlation_permutation_test(x, y, "pearsonr", side, n=n, cores=cores, seed=seed)
-            result_c = mcpt.correlation_permutation_test(x, y, "pearsonr", side, n=n, cores=cores, seed=seed + 1)
-            assert(result_a == result_b != result_c)
+            result_a = mcpt.correlation_permutation_test(
+                x, y, "pearsonr", side, n=n, cores=cores, seed=seed
+            )
+            result_b = mcpt.correlation_permutation_test(
+                x, y, "pearsonr", side, n=n, cores=cores, seed=seed
+            )
+            result_c = mcpt.correlation_permutation_test(
+                x, y, "pearsonr", side, n=n, cores=cores
+            )
+            result_c = mcpt.correlation_permutation_test(
+                x, y, "pearsonr", side, n=n, cores=cores
+            )
+
+            assert (result_a == result_b) 
+            assert (result_a != result_c)
+            assert (result_a != result_d)
+            assert (result_c != result_d)

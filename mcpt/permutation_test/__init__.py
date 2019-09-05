@@ -1,3 +1,4 @@
+import random as _rd
 import multiprocessing as _mp
 
 import numpy as _np
@@ -10,8 +11,8 @@ from mcpt.plot import plot_histogram
 # Handlers for the different sides.
 def _greater(tup):
     combined, x_len, reference, f, seed = tup
-    _np.random.seed(seed)
-    _np.random.shuffle(combined)
+    _rd.seed(seed)
+    _rd.shuffle(combined)
     x, y = combined[:x_len], combined[x_len:]
     diff = f(x) - f(y)
     return diff >= reference, diff
@@ -19,8 +20,8 @@ def _greater(tup):
 
 def _lower(tup):
     combined, x_len, reference, f, seed = tup
-    _np.random.seed(seed)
-    _np.random.shuffle(combined)
+    _rd.seed(seed)
+    _rd.shuffle(combined)
     x, y = combined[:x_len], combined[x_len:]
     diff = f(x) - f(y)
     return diff <= reference, diff
@@ -28,8 +29,8 @@ def _lower(tup):
 
 def _both(tup):
     combined, x_len, reference, f, seed = tup
-    _np.random.seed(seed)
-    _np.random.shuffle(combined)
+    _rd.seed(seed)
+    _rd.shuffle(combined)
     x, y = combined[:x_len], combined[x_len:]
     diff = abs(f(x) - f(y))
     return diff >= reference, diff
@@ -45,8 +46,13 @@ def _job_hander(f, jobs, cores):
 
 
 # Main function.
-def permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None, cores=1, seed=None):
-    rng = _np.random.RandomState(seed)
+def permutation_test(
+    x, y, f, side, n=10000, confidence=0.99, plot=None, cores=1, seed=None
+):
+    if seed:
+        rng = _rd.Random(seed)
+    else:
+        rng = _rd.Random()
 
     x_len = len(x)
     combined = list(x) + list(y)
@@ -60,7 +66,11 @@ def permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None, cores=1
     elif f == "stdev":
         _f = _np.std
     else:
-        raise ValueError("{} not valid for f -- must be a function, 'mean', 'median' or 'stdev'".format(f))
+        raise ValueError(
+            "{} not valid for f -- must be a function, 'mean', 'median' or 'stdev'".format(
+                f
+            )
+        )
 
     if side in _GT:
         diff = _f(x) - _f(y)
@@ -69,9 +79,13 @@ def permutation_test(x, y, f, side, n=10000, confidence=0.99, plot=None, cores=1
     elif side in _BOTH:
         diff = abs(_f(x) - _f(y))
     else:
-        raise ValueError("{} not valid for side -- should be 'greater', 'lower', or 'both'".format(side))
+        raise ValueError(
+            "{} not valid for side -- should be 'greater', 'lower', or 'both'".format(
+                side
+            )
+        )
 
-    jobs = ((combined, x_len, diff, _f, rng.randint(0, 4294967295)) for _ in range(n))
+    jobs = ((combined, x_len, diff, _f, rng.randint(0, 1e100)) for _ in range(n))
 
     if side in _GT:
         result = _job_hander(_greater, jobs, cores)
