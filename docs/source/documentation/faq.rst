@@ -2,8 +2,8 @@
 FAQ
 **********************
 
-Why shouldn't I use `mlxtend.evaluate.permutation_test <http://rasbt.github.io/mlxtend/user_guide/evaluate/permutation_test/>`_?
---------------------------------------------------------------------------------------------------------------------------------
+How does mcpt compare to the `mlxtend <http://rasbt.github.io/mlxtend/user_guide/evaluate/permutation_test/>`_ implementation?
+-----------------------------------------------------------------------------------------------------------------------------------------------
 This is a question I've been asked a few times, as a Google search for "permutation test Python" brings ``mlxtend``'s implementation up. I would like to start by saying that ``mlxtend`` is a great package, and I've used it on a number of projects. However, there are a few reasons I would prefer ``mcpt`` over ``mlxtend``. 
 
 Firstly, I have a couple of concerns with the implementation of permutation test in ``mlxtend``. 
