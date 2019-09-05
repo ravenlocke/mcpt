@@ -15,7 +15,7 @@ pip install mcpt
 `mcpt` contains two main functions: `mcpt.permutation_test` and `mcpt.correlation_permutation_test`. 
 
 
-Below is an example of the `mcpt.permutation_test` -- for more info, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#permutation-test)
+Below is an example of the `mcpt.permutation_test` - for more info, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#permutation-test)
 <pre>
 >> import mcpt
 >> x = [10, 9, 11]
@@ -29,7 +29,7 @@ Below is an example of the `mcpt.permutation_test` -- for more info, please see 
 Result(lower=0.09815650454064283, upper=0.10305649415095638, confidence=0.99)
 </pre>
 
-Below is an example of `mcpt.correlation_permutation_test` -- for more information, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#correlation-permutation-test)
+Below is an example of `mcpt.correlation_permutation_test` - for more information, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#correlation-permutation-test)
 
 <pre>
 >> import mcpt
