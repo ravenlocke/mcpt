@@ -1,5 +1,9 @@
-import matplotlib.pyplot as plt
-
+try:
+    import matplotlib.pyplot as plt
+except ImportError:
+    import matplotlib
+    matplotlib.use('agg')
+    import matplotlib.pyplot as plt
 
 def plot_histogram(x, x0, outfile, side):
     ax = plt.hist(x, bins=25)

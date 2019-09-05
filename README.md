@@ -1,3 +1,6 @@
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI status](https://img.shields.io/pypi/status/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI license](https://img.shields.io/pypi/l/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI download month](https://img.shields.io/pypi/dm/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI version shields.io](https://img.shields.io/pypi/v/mcpt.svg)](https://pypi.python.org/pypi/mcpt/)
+
+
 # mcpt: Monte Carlo permutation tests for Python
 mcpt is a Python 3 library for calculating p-values through Monte Carlo permutation tests. mcpt provides an intuitive, simple, and highly customisable interface to determining statistical significance.
 

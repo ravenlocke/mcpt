@@ -144,7 +144,7 @@ def test_ix():
     y = [ -1.28, 1.04, -1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05,]
 
     seed = 4919
-    n = 10_000
+    n = 10000
     for side in ["greater", "lower", "both"]:
         for cores in [1, 2]:
             result_a = mcpt.permutation_test(
