@@ -1,6 +1,18 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3387528.svg)](https://doi.org/10.5281/zenodo.3387528)
-[![PyPI version shields.io](https://img.shields.io/pypi/v/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI status](https://img.shields.io/pypi/status/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/mcpt.svg)](https://pypi.python.org/pypi/mcpt/)
-[![PyPI license](https://img.shields.io/pypi/l/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI download month](https://img.shields.io/pypi/dm/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) 
+<p align="center">
+    <a href="https://pypi.python.org/pypi/mcpt/" alt="version">
+        <img src="https://img.shields.io/pypi/v/mcpt.svg" /></a>
+    <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
+        <img src="https://img.shields.io/pypi/status/mcpt.svg" /></a>
+    <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
+        <img src="https://img.shields.io/pypi/pyversions/mcpt.svg" /></a>
+    <br>
+    <a href="https://doi.org/10.5281/zenodo.3387528" alt="status">
+        <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3387528.svg" /></a>
+     <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
+        <img src="https://img.shields.io/pypi/l/mcpt.svg" /></a> 
+     <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
+        <img src="https://img.shields.io/pypi/dm/mcpt.svg" /></a> 
+</p>
 
 
 # mcpt: Monte Carlo permutation tests for Python
