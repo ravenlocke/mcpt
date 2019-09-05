@@ -2,3 +2,7 @@
 .idea
 __pycache__
 *.pyc
+
+build
+_static
+_templates
