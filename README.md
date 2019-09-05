@@ -6,8 +6,8 @@
     <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
         <img src="https://img.shields.io/pypi/pyversions/mcpt.svg" /></a>
     <br>
-    <a href="https://doi.org/10.5281/zenodo.3387527" alt="status">
-        <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3387527.svg" /></a>
+    <a href="https://doi.org/10.5281/zenodo.3387528" alt="status">
+        <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3387528.svg" /></a>
      <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
         <img src="https://img.shields.io/pypi/l/mcpt.svg" /></a> 
      <a href="https://pypi.python.org/pypi/mcpt/" alt="status">
@@ -22,7 +22,7 @@ To get started, we recommend you read through Installation, Quickstart, and Func
 
 If you use `mcpt` in your research, please support us by citing us:
 
-> David J. Skelton. (2019, September 5). mcpt: Monte Carlo permutation tests for Python. Zenodo. http://doi.org/10.5281/zenodo.3387527
+> David J. Skelton. (2019, September 5). mcpt: Monte Carlo permutation tests for Python (Version 0.1.3). Zenodo. http://doi.org/10.5281/zenodo.3387528
 
 
 
