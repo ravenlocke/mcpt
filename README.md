@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3387528.svg)](https://doi.org/10.5281/zenodo.3387528)
 [![PyPI version shields.io](https://img.shields.io/pypi/v/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI status](https://img.shields.io/pypi/status/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI pyversions](https://img.shields.io/pypi/pyversions/mcpt.svg)](https://pypi.python.org/pypi/mcpt/)
 [![PyPI license](https://img.shields.io/pypi/l/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) [![PyPI download month](https://img.shields.io/pypi/dm/mcpt.svg)](https://pypi.python.org/pypi/mcpt/) 
 
@@ -6,6 +7,12 @@
 `mcpt` is a Python 3 library for calculating p-values through Monte Carlo permutation tests, providing an intuitive, simple, and highly customisable interface to determining statistical significance.
 
 To get started, we recommend you read through Installation, Quickstart, and Functions sections of our [read the docs documentation](https://mcpt.readthedocs.io/en/latest/). Also check out the [FAQ](https://mcpt.readthedocs.io/en/latest/documentation/faq.html), which we update regularly. If you have concerns about the software, or feel that there is something that should be more explicit, then we’d love to hear from you – [please open an issue on Github](https://github.com/Ravenlocke/mcpt/issues) and we’ll get back in touch ASAP.
+
+If you use `mcpt` in your research, please support us by citing us:
+
+> David J. Skelton. (2019, September 5). mcpt: Monte Carlo permutation tests for Python 3 (Version 0.1.3). Zenodo. http://doi.org/10.5281/zenodo.3387528
+
+
 
 ## TLDR;
 ### Installation
