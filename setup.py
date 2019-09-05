@@ -10,7 +10,7 @@ with io.open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setuptools.setup(
     name="mcpt",
-    version="0.1.1",
+    version="0.1.2",
     description="A Python library for calculating p-values using Monte Carlo sampling",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -22,7 +22,7 @@ setuptools.setup(
     install_requires=["scipy", "numpy", "matplotlib"],
     zip_safe=False,
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.5",
