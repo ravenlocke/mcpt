@@ -39,29 +39,31 @@ pip install mcpt
 
 
 Below is an example of the `mcpt.permutation_test` - for more info, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#permutation-test)
-<pre>
->> import mcpt
->> x = [10, 9, 11]
->> y = [12, 11, 13]
->> f = "mean"
->> n = 100_000
->> side = "lower"
 
->> result = mcpt.permutation_test(x, y, f, side, n=n)
->> print(result)
-Result(lower=0.09815650454064283, upper=0.10305649415095638, confidence=0.99)
-</pre>
+```python
+import mcpt
+x = [10, 9, 11]
+y = [12, 11, 13]
+f = "mean"
+n = 100_000
+side = "lower"
+
+result = mcpt.permutation_test(x, y, f, side, n=n)
+print(result)
+# Result(lower=0.09815650454064283, upper=0.10305649415095638, confidence=0.99)
+```
 
 Below is an example of `mcpt.correlation_permutation_test` - for more information, please see the documentation [here](https://mcpt.readthedocs.io/en/latest/documentation/quickstart.html#correlation-permutation-test)
 
-<pre>
->> import mcpt
->> x = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
->> y = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
->> side = "both"
->> f = "pearsonr"
+```python
+import mcpt
 
->> result = mcpt.correlation_permutation_test(x, y, f=f, side=side)
->> print(result)
-Result(lower=0.021282451892029475, upper=0.029347445354757373, confidence=0.99)
-</pre>
+x = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
+y = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
+side = "both"
+f = "pearsonr"
+
+result = mcpt.correlation_permutation_test(x, y, f=f, side=side)
+print(result)
+# Result(lower=0.021282451892029475, upper=0.029347445354757373, confidence=0.99)
+```
