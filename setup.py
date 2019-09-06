@@ -10,7 +10,7 @@ with io.open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setuptools.setup(
     name="mcpt",
-    version="0.1.7",
+    version="0.1.8",
     description="A Python library for calculating p-values using Monte Carlo sampling",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -29,5 +29,5 @@ setuptools.setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
-    python_requires='~=3.5',
+    python_requires="~=3.5",
 )

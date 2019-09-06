@@ -2,7 +2,6 @@ import random as _rd
 import multiprocessing as _mp
 
 import scipy.stats as _st
-import pandas as _pd
 
 from mcpt import _GT, _LT, _BOTH, _RESULT
 from mcpt.ci import wilson
