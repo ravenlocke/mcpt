@@ -47,7 +47,7 @@ x = [10, 9, 11]
 y = [12, 11, 13]
 side = "lower"
 f = "mean"
-n = 100_000
+n = 100000
 
 result = mcpt.permutation_test(x, y, f=f, side=side, n=n)
 print(result)
