@@ -42,14 +42,16 @@ Below is an example of the `mcpt.permutation_test` - for more info, please see t
 
 ```python
 import mcpt
+
 x = [10, 9, 11]
 y = [12, 11, 13]
+side = "lower"
 f = "mean"
 n = 100_000
-side = "lower"
 
-result = mcpt.permutation_test(x, y, f, side, n=n)
+result = mcpt.permutation_test(x, y, f=f, side=side, n=n)
 print(result)
+
 # Result(lower=0.09815650454064283, upper=0.10305649415095638, confidence=0.99)
 ```
 
@@ -65,5 +67,6 @@ f = "pearsonr"
 
 result = mcpt.correlation_permutation_test(x, y, f=f, side=side)
 print(result)
+
 # Result(lower=0.021282451892029475, upper=0.029347445354757373, confidence=0.99)
 ```
