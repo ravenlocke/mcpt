@@ -2,6 +2,7 @@ import random as _rd
 import multiprocessing as _mp
 
 import scipy.stats as _st
+import pandas as _pd
 
 from mcpt import _GT, _LT, _BOTH, _RESULT
 from mcpt.ci import wilson
@@ -90,12 +91,15 @@ def correlation_permutation_test(
             )
         )
 
+    _x = list(x)
+    _y = list(y)
+
     if side in _GT:
-        stat_0 = _f(x, y)
+        stat_0 = _f(_x, _y)
     elif side in _LT:
-        stat_0 = _f(x, y)
+        stat_0 = _f(_x, _y)
     elif side in _BOTH:
-        stat_0 = abs(_f(x, y))
+        stat_0 = abs(_f(_x, _y))
     else:
         raise ValueError(
             "{} not valid for side -- should be 'greater', 'lower', or 'both'".format(
@@ -103,7 +107,7 @@ def correlation_permutation_test(
             )
         )
 
-    jobs = ((x[:], y[:], stat_0, _f, rng.randint(0, 1e100)) for _ in range(n))
+    jobs = ((_x[:], _y[:], stat_0, _f, rng.randint(0, 1e100)) for _ in range(n))
 
     if side in _GT:
         result = _job_hander(_correlation_greater, jobs, cores)

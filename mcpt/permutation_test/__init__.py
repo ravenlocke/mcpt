@@ -2,6 +2,7 @@ import random as _rd
 import multiprocessing as _mp
 
 import numpy as _np
+import pandas as _pd
 
 from mcpt import _GT, _LT, _BOTH, _RESULT
 from mcpt.ci import wilson
@@ -55,6 +56,7 @@ def permutation_test(
         rng = _rd.Random()
 
     x_len = len(x)
+
     combined = list(x) + list(y)
 
     if callable(f):

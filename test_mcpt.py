@@ -1,9 +1,11 @@
 import mcpt
 
-
 def test_i():
     # From https://www.thoughtco.com/example-of-a-permutation-test-3997741
-    # One sided (lower) should be 0.1,
+    # One sided (lower) should be 0.1.
+
+    x0 = [10, 9, 11]
+    y0 = [12, 11, 13]
 
     x = [10, 9, 11]
     y = [12, 11, 13]
@@ -15,10 +17,18 @@ def test_i():
     assert 0.1 >= result.lower
     assert 0.1 <= result.upper
 
+    # The vectors shouldn't have changed as a result of function.
+    assert x0 == x
+    assert y0 == y
+
+
 
 def test_ii():
     # From https://www.thoughtco.com/example-of-a-permutation-test-3997741
-    # Two sided should be 0.2
+    # Two sided should be 0.2.
+
+    x0 = [10, 9, 11]
+    y0 = [12, 11, 13]
 
     x = [10, 9, 11]
     y = [12, 11, 13]
@@ -29,6 +39,10 @@ def test_ii():
     result = mcpt.permutation_test(x, y, f, side, n=n, seed=3919)
     assert 0.2 >= result.lower
     assert 0.2 <= result.upper
+
+    # The vectors shouldn't have changed as a result of function.
+    assert x0 == x
+    assert y0 == y
 
 
 def test_iii():
@@ -75,6 +89,9 @@ def test_iv():
 def test_v():
     # Taken from http://biol09.biol.umontreal.ca/PLcourses/Statistical_tests.pdf
     # True p-value calculated through exhaustive permutation of y.
+    x0 = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
+    y0 = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
+
     x = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
     y = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
 
@@ -88,10 +105,15 @@ def test_v():
     assert expected >= result.lower
     assert expected <= result.upper
 
+    assert y0 == y
+    assert x0 == x
 
 def test_vi():
     # Taken from http://biol09.biol.umontreal.ca/PLcourses/Statistical_tests.pdf
     # True p-value calculated through exhaustive permutation of y.
+    x0 = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
+    y0 = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
+
     x = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
     y = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
 
@@ -105,20 +127,30 @@ def test_vi():
     assert expected >= result.lower
     assert expected <= result.upper
 
+    assert y0 == y
+    assert x0 == x
+
 
 def test_vii():
     # From https://www.thoughtco.com/example-of-a-permutation-test-3997741
     # One sided (lower) should be 0.1,
+    x0 = [10, 9, 11]
+    y0 = [12, 11, 13]
 
     x = [10, 9, 11]
     y = [12, 11, 13]
-    f = "mean"
+
+    f = "mean"   
     n = 100000
     side = "lower"
 
     result = mcpt.permutation_test(x, y, f, side, n=n, cores=2, seed=4919)
+
     assert 0.1 >= result.lower
     assert 0.1 <= result.upper
+
+    assert y0 == y
+    assert x0 == x
 
 
 def test_viii():
@@ -140,8 +172,11 @@ def test_viii():
 
 def test_ix():
     # Test that seeding works.
+    x0 = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
+    y0 = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
+
     x = [-2.31, 1.06, 0.76, 1.38, -0.26, 1.29, -1.31, 0.41, -0.67, -0.58]
-    y = [ -1.28, 1.04, -1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05,]
+    y = [-1.08, 1.03, 0.90, 0.24, -0.24, 0.76, -0.57, -0.05, -1.28, 1.04]
 
     seed = 4919
     n = 10000
@@ -153,15 +188,31 @@ def test_ix():
             result_b = mcpt.permutation_test(
                 x, y, "mean", side, n=n, cores=cores, seed=seed
             )
-            result_c = mcpt.permutation_test(
-                x, y, "mean", side, n=n, cores=cores)
-            result_d = mcpt.permutation_test(
-                x, y, "mean", side, n=n, cores=cores)
-            
+
             assert (result_a == result_b) 
-            assert (result_a != result_c)
-            assert (result_a != result_d)
-            assert (result_c != result_d)
+           
+
+            for _ in range(10):
+                result_c = mcpt.permutation_test(
+                    x, y, "mean", side, n=n, cores=cores)
+
+                if result_a != result_c:
+                    break
+            else:
+                raise Exception("result_a always identical to result_c")
+
+
+            for _ in range(10):
+                result_d = mcpt.permutation_test(
+                    x, y, "mean", side, n=n, cores=cores)
+                if result_c != result_d:
+                    break
+            else:
+                raise Exception("result_c always identical to result_d")
+
+
+            assert x0 == x
+            assert y0 == y
 
             result_a = mcpt.correlation_permutation_test(
                 x, y, "pearsonr", side, n=n, cores=cores, seed=seed
@@ -169,20 +220,38 @@ def test_ix():
             result_b = mcpt.correlation_permutation_test(
                 x, y, "pearsonr", side, n=n, cores=cores, seed=seed
             )
-            result_c = mcpt.correlation_permutation_test(
-                x, y, "pearsonr", side, n=n, cores=cores
-            )
-            result_c = mcpt.correlation_permutation_test(
-                x, y, "pearsonr", side, n=n, cores=cores
-            )
-
             assert (result_a == result_b) 
-            assert (result_a != result_c)
-            assert (result_a != result_d)
-            assert (result_c != result_d)
+
+
+            for _ in range(10):
+                result_c = mcpt.correlation_permutation_test(
+                    x, y, "pearsonr", side, n=n, cores=cores
+                )
+                if result_a != result_c:
+                    break
+            else:
+                 raise Exception("result_a always identical to result_c")
+            
+            for _ in range(10):
+                result_d = mcpt.correlation_permutation_test(
+                   x, y, "pearsonr", side, n=n, cores=cores
+                  )
+                if result_c != result_d:
+                    break
+            else:
+                raise Exception("result_c always identical to result_d")
+
+
+            assert x0 == x
+            assert y0 == y
+    
 
 def test_x():
+    # Custom function 
     from scipy.stats import kendalltau
+
+    x0 = [4.02, 4.52, 4.79, 4.89, 5.27, 5.63, 5.89, 6.08, 6.13, 6.19, 6.47]
+    y0 = [4.56, 2.92, 2.71, 3.34, 3.53, 3.47, 3.20, 4.51, 3.76, 3.77, 4.03]
 
     x = [4.02, 4.52, 4.79, 4.89, 5.27, 5.63, 5.89, 6.08, 6.13, 6.19, 6.47]
     y = [4.56, 2.92, 2.71, 3.34, 3.53, 3.47, 3.20, 4.51, 3.76, 3.77, 4.03]
@@ -194,3 +263,53 @@ def test_x():
     result = mcpt.correlation_permutation_test(x, y, side="both", f=ktau)
     assert result.lower <= 0.1646
     assert result.upper >= 0.1646 
+
+    assert x0 == x
+    assert y0 == y
+
+def test_xi():
+    # Pandas DataSeries integration with permutation_test.
+    import pandas as pd
+    import numpy as np
+
+    a = [10, 9, 11]
+    b = [12, 11, 13]
+    side = "lower"
+
+    a_df0 = pd.DataFrame(columns=["Change"], data=a)
+    b_df0 = pd.DataFrame(columns=["Change"], data=b)
+
+    a_df = pd.DataFrame(columns=["Change"], data=a)
+    b_df = pd.DataFrame(columns=["Change"], data=b)
+
+    result = mcpt.permutation_test(a_df["Change"], b_df["Change"], f="mean", side=side, seed=6919)
+    assert 0.1 >= result.lower
+    assert 0.1 <= result.upper
+
+    assert a_df0.equals(a_df)
+    assert b_df0.equals(b_df)
+
+def test_xii():
+    # Pandas DataSeries integration with correlation_permutation_test.
+    import pandas as pd
+    import numpy as np
+    from scipy.stats import kendalltau
+
+    x = [4.02, 4.52, 4.79, 4.89, 5.27, 5.63, 5.89, 6.08, 6.13, 6.19, 6.47]
+    y = [4.56, 2.92, 2.71, 3.34, 3.53, 3.47, 3.20, 4.51, 3.76, 3.77, 4.03]
+    side = "both"
+
+    df0 = pd.DataFrame(columns=["X", "Y"], data=zip(x,y))
+    df = pd.DataFrame(columns=["X", "Y"], data=zip(x,y))
+
+    def ktau(x, y):
+        tau, _ = kendalltau(x, y)
+        return tau
+
+    expected = 0.1646
+
+    result = mcpt.correlation_permutation_test(df["X"], df["Y"], f=ktau, side=side, seed=6919)
+    assert expected >= result.lower
+    assert expected <= result.upper
+
+    assert df0.equals(df)
