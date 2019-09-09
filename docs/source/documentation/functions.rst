@@ -14,7 +14,7 @@ There are a number of advanced uses of the functions discussed here that are com
 
 Setting the number of permutations
 ----------------------------------
-The number of random permutations to be used is set by specifying the ``n`` parameter when calling either function. By default this value is ``10,000``; increasing this value is one approach to narrowing the p-value range returned if required.
+The number of random permutations to be used is set by specifying the ``n`` parameter when calling either function. By default this value is ``10,000``; increasing this value is one approach to narrowing the range returned (if required).
 
 Multiprocessing
 ---------------
@@ -28,7 +28,7 @@ If a seed is given, this is used to seed a random number generator (``random.Ran
 
 Confidence
 ----------
-A Monte Carlo permutation test has a random factor and, thus, the p-value returned differs from run-to-run. However, based on the number of permutations and the p-value returned, it is possible to calculate a range in which, with a certain confidence, we can say the true p-value lies in. There are a number of ways to achieve this, but ``mcpt`` uses the `Wilson score interval <https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Wilson_score_interval>`_ binomial approximation approach. The confidence can be set by passing the ``confidence`` parameter, where confidence is a float -- for example, passing ``confidence = 0.999`` means that there is a :math:`1/1000` chance that the true p-value lies outside the interval returned by the function called.
+A Monte Carlo permutation test has a random factor and, thus, the approximate p-value returned differs from run-to-run. However, based on the number of permutations and the approximate p-value returned, it is possible to calculate a range in which, with a certain confidence, we can say the true p-value lies in. There are a number of ways to achieve this, but ``mcpt`` uses the `Wilson score interval <https://en.wikipedia.org/wiki/Binomial_proportion_confidence_interval#Wilson_score_interval>`_ binomial approximation approach. The confidence can be set by passing the ``confidence`` parameter, where confidence is a float -- for example, passing ``confidence = 0.999`` means that there is a :math:`1/1000` chance that the true p-value lies outside the interval returned.
 
 
 .. _permutation-test-advanced:
